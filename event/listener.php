@@ -94,7 +94,7 @@ class listener implements EventSubscriberInterface
 				}
 			}
 		}
-		$event['location']= $location;
+		$event['location'] = $location;
 	}
 	
 	public function add_permissions($event)
