@@ -3,6 +3,7 @@ services:
         class: kemrash\vi\event\listener
         arguments:
             - '@auth'
+            - '@config'
             - '@dbal.conn'
             - '%core.root_path%'
         tags:
