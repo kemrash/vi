@@ -1,0 +1,32 @@
+{
+    "name": "kemrash/vi",
+    "type": "phpbb-extension",
+    "description": "Показывает изображения в viewonline.php",
+    "homepage": "https://github.com/kemrash/vi",
+    "version": "0.0.2",
+    "time": "2020-01-23",
+    "license": "GPL-2.0-only",
+    "authors": [
+        {
+            "name": "KEMnEP",
+            "email": "",
+            "homepage": "",
+            "role": ""
+        }
+    ],
+    "require": {
+        "php": ">=5.4",
+        "composer/installers": "~1.0"
+    },
+    "extra": {
+        "display-name": "Viewonline images",
+        "soft-require": {
+            "phpbb/phpbb": ">=3.2.8"
+        },
+        "version-check": {
+            "host": "kemnep.ru",
+            "directory": "/version_check_phpbb3",
+            "filename": "vi.html"
+        }
+    }
+}

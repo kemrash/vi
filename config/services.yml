@@ -1,0 +1,19 @@
+services:
+    kemrash.vi.listener:
+        class: kemrash\vi\event\listener
+        arguments:
+            - '@auth'
+            - '@dbal.conn'
+            - '%core.root_path%'
+        tags:
+            - { name: event.listener }
+
+    kemrash.vi.cron.task.vi:
+        class: kemrash\vi\cron\task\vi
+        arguments:
+            - '@config'
+            - '%core.root_path%'
+        calls:
+            - [set_name, [kemrash.vi.cron.task.vi]]
+        tags:
+            - { name: cron.task }
