@@ -29,11 +29,10 @@ class vi extends \phpbb\cron\task\base
 	 * @return void
 	 */
 	public function run()
-	{
-		
+	{		
 		// Run your cron actions here...
 		$dir = $this->phpbb_root_path . 'ext/kemrash/vi/styles/all/theme/images';
-		if (file_exists($dir))
+		if ($this->config->offsetGet('vi_gd_status') == 1 and file_exists($dir) and is_writable($dir))
 		{
 			foreach (glob($dir . '/*') as $file)
 			{

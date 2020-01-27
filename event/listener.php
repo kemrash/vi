@@ -36,9 +36,10 @@ class listener implements EventSubscriberInterface
 	{
 		$location = $event['location'];
 		$row = $event['row'];
+		$dir = $this->phpbb_root_path . 'ext/kemrash/vi/styles/all/theme/images';
 		if ($this->config->offsetGet('vi_gd_status') == 0)
 		{
-			if (function_exists('ImageCreateFromJpeg') and function_exists('ImageCreateFromPng'))
+			if (function_exists('ImageCreateFromJpeg') and function_exists('ImageCreateFromPng') and chmod($dir, 0777))
 			{
 				$this->config->set('vi_gd_status', 1);
 			}
@@ -59,8 +60,8 @@ class listener implements EventSubscriberInterface
 				{
 					$img_url = 'ext/kemrash/vi/styles/all/theme/images/' . $clear_id;
 					$img_url_origen = $this->phpbb_root_path . 'files/' . $mimetype['physical_filename'];
-					$img_save_path = $this->phpbb_root_path . 'ext/kemrash/vi/styles/all/theme/images/' . $clear_id;
-					if (!file_exists($img_url . '.jpg') and ($mimetype['mimetype'] == 'image/jpeg' or $mimetype['mimetype'] == 'image/jpg'))
+					$img_save_path = $dir . '/' . $clear_id;
+					if (is_writable($dir) and !file_exists($img_url . '.jpg') and ($mimetype['mimetype'] == 'image/jpeg' or $mimetype['mimetype'] == 'image/jpg'))
 					{
 						$img = @imagecreatefromjpeg($img_url_origen);
 						if ($img)
@@ -75,7 +76,7 @@ class listener implements EventSubscriberInterface
 							$location =  $location . ' <img src="download/file.php?id=' . $clear_id . '&mode=view" style=" max-width: 100px; max-height: 120px; ">';
 						}
 					}
-					elseif (!file_exists($img_url . '.png') and $mimetype['mimetype'] == 'image/png')
+					elseif (is_writable($dir) and !file_exists($img_url . '.png') and $mimetype['mimetype'] == 'image/png')
 					{
 						$img = @imagecreatefrompng($img_url_origen);
 						if ($img)
@@ -94,6 +95,11 @@ class listener implements EventSubscriberInterface
 					}
 					elseif (file_exists($img_url . '.jpg')) $location =  $location . ' <img src="' . $img_url . '.jpg">';
 					elseif (file_exists($img_url . '.png')) $location =  $location . ' <img src="' . $img_url . '.png">';
+					elseif (!is_writable($dir))
+					{
+						$this->config->set('vi_gd_status', 2);
+						$location =  $location . ' <img src="download/file.php?id=' . $clear_id . '&mode=view" style=" max-width: 100px; max-height: 120px; ">';
+					}
 				}
 				else
 				{
