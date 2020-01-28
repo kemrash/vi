@@ -49,7 +49,7 @@ class listener implements EventSubscriberInterface
 				$this->config->set('vi_gd_status', 2);
 			}
 		}
-		if (preg_match('/^download\/file\.php\?id=.\d/', $row['session_page']) and $this->auth->acl_get('u_kemrash_vi'))
+		if (preg_match('/^download\/file\.php\?id=\d/', $row['session_page']) and $this->auth->acl_get('u_kemrash_vi'))
 		{
 			$clear_id = preg_replace('/(^.*?id=|\D.*)/', '', $row['session_page']);
 			$sql = 'SELECT mimetype, physical_filename FROM ' . ATTACHMENTS_TABLE . '
