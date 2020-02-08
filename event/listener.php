@@ -31,7 +31,7 @@ class listener implements EventSubscriberInterface
 		$this->db = $db;
 		$this->phpbb_root_path = $phpbb_root_path;
 	}
-	
+
 	public function kem_vi($event)
 	{
 		$location = $event['location'];
@@ -110,7 +110,7 @@ class listener implements EventSubscriberInterface
 		}
 		$event['location'] = $location;
 	}
-	
+
 	public function add_permissions($event)
 	{
 		$permissions = $event['permissions'];

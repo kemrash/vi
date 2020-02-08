@@ -19,7 +19,7 @@ class v_0_0_2 extends \phpbb\db\migration\migration
 		return array(
 			array('config.update', array('vi_version', '0.0.2')),
 			array('config.add', array('vi_cron_last_go', 0)),
-			array('config.add', array('vi_cron_go', (60 * 60 * 24))),
+			array('config.add', array('vi_cron_go', (60 * 60 * 24 * 90))),
 		);
 	}
 }
